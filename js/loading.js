@@ -1,3 +1,3 @@
 'use strict';
 
-ajaxRequest('GET', 'php/request.php/polls', loadHtmlAndJs);
+ajaxRequest('GET', 'php/request.php/module/polls/list', loadHtmlAndJs);
