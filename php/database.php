@@ -8,16 +8,24 @@ function dbConnect() {
     echo 'Connexion échouée : '.$e->getMessage();
     return false;
   }
-
   return $pdo;
 }
 
 function dbRequestPolls($db, $id = -1, $login = '') {
-  $query = $db->prepare("SELECT * FROM polls WHERE id = :id AND login = :login");
-  $query->execute(array(':id' => $id, ':login' => $login));
+  $request = "SELECT * FROM polls ";
+
+  if ($id != -1) $request .= "WHERE id = :id ";
+  if ($login != '') $request .= "AND login = :login";
+
+  $query = $db->prepare($request);
+
+  if ($id != -1) $query->bindParam(":id", $id);
+  if ($login != '') $query->bindParam(":login", $login);
+
+  $query->execute();
   $row = $query->fetchAll(PDO::FETCH_ASSOC);
   var_dump($row);
 }
 
 $db = dbconnect();
-dbRequestPolls($db, 1, 'cir2');
+dbRequestPolls($db, -1, '');
