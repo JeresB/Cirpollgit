@@ -26,6 +26,3 @@ function dbRequestPolls($db, $id = -1, $login = '') {
   $row = $query->fetchAll(PDO::FETCH_ASSOC);
   var_dump($row);
 }
-
-$db = dbconnect();
-dbRequestPolls($db, -1, '');

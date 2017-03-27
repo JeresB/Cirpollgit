@@ -1,7 +1,11 @@
 'use strict';
 
-function ajaxRequest(type, request, callback) {
+function ajaxRequest(type, request, callback, data = null) {
   var xhr;
+
+  if (type == 'GET') {
+    request += '?' + data;
+  }
 
   xhr = new XMLHttpRequest();
   xhr.open(type, request, true);
@@ -20,7 +24,7 @@ function ajaxRequest(type, request, callback) {
     }
   };
 
-  xhr.send();
+  xhr.send(data);
 }
 
 function callback(response) {
