@@ -3,11 +3,12 @@
 function ajaxRequest(type, request, callback, data = null) {
   var xhr;
 
-  if (type == 'GET') {
-    request += '?' + data;
-  }
-
   xhr = new XMLHttpRequest();
+
+  if (type == 'GET' && data != null)
+    request += '?' + data;
+
+
   xhr.open(type, request, true);
 
   xhr.onreadystatechange = function(){
@@ -17,6 +18,7 @@ function ajaxRequest(type, request, callback, data = null) {
 
     switch (xhr.status) {
       case 200:
+        console.log(xhr.responseText);
         callback(xhr.responseText);
         break;
       default:
