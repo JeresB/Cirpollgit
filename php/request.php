@@ -21,6 +21,13 @@
 			{
 				$data = NULL;
 
+				$id = array_shift($request_explode);
+
+				if ($id != NULL && $id != "" && $requestType == 'GET') {
+					$id = intval($id);
+					$data = dbRequestPolls($db, $id);
+				}
+
 				if ($requestType == 'GET') {
 					if (isset($_GET['login']))
 						$data = dbRequestPolls($db, -1, $_GET['login']);
