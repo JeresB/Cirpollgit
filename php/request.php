@@ -20,17 +20,16 @@
 			if(array_shift($request_explode) == 'polls')
 			{
 				$data = NULL;
-				console.log("connexion a la bdd");
 
 				if ($requestType == 'GET') {
 					if (isset($_GET['login']))
 						$data = dbRequestPolls($db, -1, $_GET['login']);
 					else
 						$data = dbRequestPolls($db);
-					var_dump($data);
+					//var_dump($data);
 				}
 				if ($data != NULL)
-					sendJsonData();
+					sendJsonData($data);
 			}
 		} else {
 			header('HTTP/1.1 503 Service Unavailable');
