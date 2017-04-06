@@ -80,9 +80,9 @@ function openGlobalPoll(pollId) {
   var id = pollId.substr(6);
   $.cookie('current-id', id);
 
-  var cookieId = $.cookie({ get : 'current-id' });
+  var cookieId = $.cookie('current-id');
 
-  if (typeof cookie == 'undefined') {
+  if (typeof cookieId == 'undefined') {
     ajaxRequest('GET', 'php/request.php/module/polls/reply', loadHtmlAndJs);
   } else {
     ajaxRequest('GET', 'php/request.php/module/polls/results', loadHtmlAndJs);
@@ -91,5 +91,14 @@ function openGlobalPoll(pollId) {
 }
 
 function openOwnPoll(pollId) {
+  var id = pollId.substr(6);
+  $.cookie('current-id', id);
 
+  var cookieId = $.cookie('current-id');
+
+  if (typeof cookieId == 'undefined') {
+    ajaxRequest('GET', 'php/request.php/module/polls/reply', loadHtmlAndJs);
+  } else {
+    ajaxRequest('GET', 'php/request.php/module/polls/results', loadHtmlAndJs);
+  }
 }
