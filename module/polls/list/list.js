@@ -44,7 +44,7 @@ function loadOwnPolls(ajaxResponse) {
     text += response[i].id +'"><span class="glyphicon glyphicon-remove"';
     text += 'aria-hidden="true" id=rpoll-' + response[i].id +'></span></a></span>';
     text += '<span class = "badge">' + response[i].participants + '</span> ';
-    
+
     element = document.createElement('a');
     element.className = 'list-group-item';
     element.setAttribute("href", "#");
