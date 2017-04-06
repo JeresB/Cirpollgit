@@ -5,11 +5,11 @@ function ajaxRequest(type, request, callback, data = null) {
 
   xhr = new XMLHttpRequest();
 
-  if (type == 'GET' && data != null)
+  if (type == 'GET' && data !== null)
     request += '?' + data;
 
-
   xhr.open(type, request, true);
+  xhr.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded');
 
   xhr.onreadystatechange = function(){
     if (xhr.readyState != 4) {

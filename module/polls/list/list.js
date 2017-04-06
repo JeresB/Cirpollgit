@@ -24,6 +24,16 @@ function loadGlobalPolls(ajaxResponse) {
     element.setAttribute('id', 'gpoll-' + response[i].id);
     element.innerHTML = text;
     list.appendChild(element);
+
+    $('#gpoll-' + response[i].id).unbind('click').click(
+      function (event) {
+        event.preventDefault();
+
+        clearInterval(refreshGlobal);
+        clearInterval(refreshOwn);
+
+        openGlobalPoll(event.target.id);
+      });
   }
 
   console.log(response);
@@ -51,7 +61,35 @@ function loadOwnPolls(ajaxResponse) {
     element.setAttribute('id', 'opoll-' + response[i].id);
     element.innerHTML = text;
     list.appendChild(element);
+
+    $('#opoll-' + response[i].id).unbind('click').click(
+      function (event) {
+        event.preventDefault();
+
+        clearInterval(refreshGlobal);
+        clearInterval(refreshOwn);
+
+        openOwnPoll(event.target.id);
+      });
   }
 
   console.log(ajaxResponse);
+}
+
+function openGlobalPoll(pollId) {
+  var id = pollId.substr(6);
+  $.cookie('current-id', id);
+
+  var cookieId = $.cookie({ get : 'current-id' });
+
+  if (typeof cookie == 'undefined') {
+    ajaxRequest('GET', 'php/request.php/module/polls/reply', loadHtmlAndJs);
+  } else {
+    ajaxRequest('GET', 'php/request.php/module/polls/results', loadHtmlAndJs);
+  }
+
+}
+
+function openOwnPoll(pollId) {
+
 }
